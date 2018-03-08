@@ -20,6 +20,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.text.Element;
+import javax.swing.text.TableView.TableRow;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
@@ -28,18 +33,22 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 
-
+/**
+ * School Portal project. 3/8/2018
+ * 
+ * */
 public class JStudent2 {
 
 	private JFrame frmSchoolPortal;
 	private JTextField textField_1;
 	private JTextField txtTodaysDate;
-	private JTable table;
+	private JTable table1;
 	private int num_rows = 5;
 	private int num_cols = 5;
 	private JTextField txtJess;
 	private JTextField txtDeveloper;
 	private JTextField textField;
+	DefaultTableModel model ;
 
 	/**
 	 * Launch the application.
@@ -71,30 +80,59 @@ public class JStudent2 {
 	 * 
 	 */
 	private void updateRecord() {
+		
+		//Create data or get data from a database source.
 		Object[][] updatedata = {
-		        {"Beverly", "Smith","Fun", new Integer(50), new Boolean(false)},
-		        {"John", "Doe", "Notfun", new Integer(30), new Boolean(true)},
-		        {"Noah", "Black", "Farmer", new Integer(20), new Boolean(false)},
-		        {"Juaqim", "White","Fisher", new Integer(45), new Boolean(true)},
-		        {"James", "Brown", "Runner", new Integer(48), new Boolean(false)},
-		        {"Samuel", "Lorenzo", "Actor", new Integer(48), new Boolean(false)}
+				{new Integer(100), "Kathy", "Smith", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+		        {new Integer(101), "John", "Doe", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+		        {new Integer(102), "Sue", "Black",  new Integer(3), new Integer(12),new Integer(1973),"Male" },
+		        {new Integer(103), "Jane", "White", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+		        {new Integer(1111), "Joe", "Brown",  new Integer(3), new Integer(12),new Integer(1973),"Male" },
+		        {new Integer(105), "Moe", "Vaughn",  new Integer(30), new Integer(102),new Integer(1983),"Male" },
 		        };
-		
-		//table.getModel().setValueAt(null, 1, 1); //this code works
-		 //table.setValueAt(Object aValue, int rowIndex, int columnIndex);
-		
-		for (int r=0; r < num_rows; r++) {
-			for (int c=0; c < num_cols; c++) {
-				table.getModel().setValueAt(null, r, c); //delete
-				table.getModel().setValueAt(updatedata[r][c], r, c); //input new data
-			}
-		}
+
+		fillStudentTable(updatedata);
 		
 	}
+	
+	/**
+	 * Generic method that deletes and fill a table with new data
+	 * if data is empty, deletes the table only
+	 * otherwise replaces the data with new one
+	 * */
+	private void fillStudentTable(Object[][] data ) {
+
+		num_cols = 6;
+		
+		int numStudents = data.length;
+		//int num_of_rows_now = table1.getRowCount(); 
+		
+		// remove all row from table
+        if (table1.getRowCount() > 0) {
+            for (int i = table1.getRowCount() - 1; i > -1; i--) {
+                model.removeRow(i);
+            }
+        }
+        
+		//DefaultTableModel dm = (DefaultTableModel)table.getModel();
+		//dm.getDataVector().removeAllElements();
+		//dm.fireTableDataChanged(); // notifies the JTable that the model has changed
+		
+		for (int r=0; r < numStudents; r++) {
+
+			//for (int c=0; c < num_cols; c++) {
+				//table.getModel().setValueAt(null, r, c); //delete
+				//table1.getModel().setValueAt(data[r][c], r, c); //input new data
+				model.addRow(new Object[]{data[r][0], data[r][1],data[r][2],data[r][3], data[r][4],data[r][5],data[r][6]});
+				
+			//}
+		}
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize()  {
 		frmSchoolPortal = new JFrame();
 		frmSchoolPortal.setTitle("XYZ Records Portal");
 		frmSchoolPortal.setBounds(100, 100, 1000, 808);
@@ -108,24 +146,34 @@ public class JStudent2 {
 		txtTodaysDate = new JTextField();
 		txtTodaysDate.setText(formatDateTime);
 		txtTodaysDate.setColumns(10);
-					
-		 String[] columnNames = {"First Name",
-                 "Last Name",
-                 "Sport",
-                 "# of Years",
-                 "Vegetarian"};
-
-		 int v1 = 311; 
+		
 		 Object[][] data = {
-			        {"Kathy", "Smith","Snowboarding", new Integer(v1), new Boolean(false)},
-			        {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},
-			        {"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)},
-			        {"Jane", "White","Speed reading", new Integer(20), new Boolean(true)},
-			        {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
+			        {new Integer(100), "Kathy", "Smith", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+			        {new Integer(101), "John", "Doe", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+			        {new Integer(102), "Sue", "Black",  new Integer(3), new Integer(12),new Integer(1973),"Male" },
+			        {new Integer(103), "Jane", "White", new Integer(3), new Integer(12),new Integer(1973),"Male" },
+			        {new Integer(104), "Joe", "Brown",  new Integer(3), new Integer(12),new Integer(1973),"Male" }
 			        };
-		
-		String[] QuarterStrings = { " Q1 ", " Q2 ", " Summer Q3 ", " Q4 "};
-		
+		 
+		//Create the table 
+		table1 = new JTable();
+		table1.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table1.setFillsViewportHeight(true);
+	 				 
+		//set columns of the table
+		 model = new DefaultTableModel();
+         table1.setModel(model);
+         model.addColumn("Id");
+         model.addColumn("First Name");
+         model.addColumn("Last Name");
+         model.addColumn("B-month");
+         model.addColumn("B-day");
+         model.addColumn("B-year");
+         model.addColumn("Gender");
+         
+         fillStudentTable(data);
+        
+		String[] QuarterStrings = { " Q1 ", " Q2 ", " Summer Q3 ", " Q4 "};		
 		String[] SectionsStrings = { "100-101", "100-102", "200-101", "200-501"};
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -216,12 +264,12 @@ public class JStudent2 {
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Demo1", null, panel, null);
 		
-		table = new JTable(data, columnNames);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-		table.setFillsViewportHeight(true);
+		//table = new JTable(data, columnNames);
+		//table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		//table.setFillsViewportHeight(true);
 		
 		//Create JScrollpane, add table to it
-		JScrollPane scrollPane = new JScrollPane(table);
+		JScrollPane scrollPane = new JScrollPane(table1);
 		scrollPane.setViewportBorder(new LineBorder(Color.GREEN, 2));
 		
 		textField_1 = new JTextField();
