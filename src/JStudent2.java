@@ -18,14 +18,16 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JToolBar;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JSeparator;
-import java.awt.Canvas;
+
 import javax.swing.ImageIcon;
+import javax.swing.JTabbedPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JPanel;
+
 
 public class JStudent2 {
 
@@ -95,14 +97,8 @@ public class JStudent2 {
 	private void initialize() {
 		frmSchoolPortal = new JFrame();
 		frmSchoolPortal.setTitle("XYZ Records Portal");
-		frmSchoolPortal.setBounds(100, 100, 937, 708);
+		frmSchoolPortal.setBounds(100, 100, 1000, 808);
 		frmSchoolPortal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		textField_1 = new JTextField();
-		textField_1.setText("2018");
-		textField_1.setColumns(10);
-		
-		JLabel lblNewLabel = new JLabel("Year");
 
 		//Date 
 		LocalDateTime now = LocalDateTime.now();
@@ -127,32 +123,10 @@ public class JStudent2 {
 			        {"Jane", "White","Speed reading", new Integer(20), new Boolean(true)},
 			        {"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}
 			        };
-		 
-		 table = new JTable(data, columnNames);
-	         table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-	         table.setFillsViewportHeight(true);
-
-		JLabel lblQuater = new JLabel("Quarter");
-		
-		//Create JScrollpane, add table to it
-		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setViewportBorder(new LineBorder(Color.GREEN, 2));
 		
 		String[] QuarterStrings = { " Q1 ", " Q2 ", " Summer Q3 ", " Q4 "};
-		JComboBox quarter_comboBox = new JComboBox(QuarterStrings);
 		
 		String[] SectionsStrings = { "100-101", "100-102", "200-101", "200-501"};
-		JComboBox section_comboBox = new JComboBox(SectionsStrings);
-		
-		JLabel lblSection = new JLabel("Section");
-		
-		JButton btnUpdateRecord = new JButton("Update Record");
-		btnUpdateRecord.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				updateRecord();
-			}
-		});
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Public\\Pictures\\Sample Pictures\\Koala 2.jpg"));
@@ -175,102 +149,150 @@ public class JStudent2 {
 		JLabel lblId = new JLabel("ID");
 		
 		JButton btnConfig = new JButton("Config");
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
         
 		GroupLayout groupLayout = new GroupLayout(frmSchoolPortal.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(20)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtTodaysDate, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 231, GroupLayout.PREFERRED_SIZE))
-							.addGap(18))
+					.addContainerGap(12, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(txtTodaysDate, GroupLayout.PREFERRED_SIZE, 167, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 231, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblId, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblUser)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(txtJess, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGroup(groupLayout.createSequentialGroup()
+										.addComponent(lblLevel)
+										.addGap(29)
+										.addComponent(txtDeveloper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnConfig, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED))
-								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblId, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblUser)
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(txtJess, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(lblLevel)
-											.addGap(29)
-											.addComponent(txtDeveloper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-									.addGap(44)))))
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textField_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(53)
-									.addComponent(quarter_comboBox, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-									.addGap(33)
-									.addComponent(section_comboBox, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-									.addGap(36)
-									.addComponent(btnUpdateRecord))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(75)
-									.addComponent(lblQuater)
-									.addGap(133)
-									.addComponent(lblSection)))
-							.addGap(478))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 594, GroupLayout.PREFERRED_SIZE)
-							.addGap(451))))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnConfig, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)))
+							.addGap(54)))
+					.addGap(18)
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 698, GroupLayout.PREFERRED_SIZE)
+					.addGap(347))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(txtTodaysDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(83)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblNewLabel_1)
-							.addGap(107)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtJess, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblUser))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblId))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtDeveloper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblLevel))
-							.addGap(33)
-							.addComponent(btnConfig, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(lblQuater, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblSection, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(quarter_comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(section_comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnUpdateRecord))
-							.addGap(18)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(80, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblNewLabel_1)
+					.addGap(142)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtJess, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblUser))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblId))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtDeveloper, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblLevel))
+					.addGap(108)
+					.addComponent(btnConfig, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(24, Short.MAX_VALUE))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(51)
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
+					.addGap(77))
 		);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Demo1", null, panel, null);
+		
+		table = new JTable(data, columnNames);
+		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+		table.setFillsViewportHeight(true);
+		
+		//Create JScrollpane, add table to it
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setViewportBorder(new LineBorder(Color.GREEN, 2));
+		
+		textField_1 = new JTextField();
+		textField_1.setText("2018");
+		textField_1.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Year");
+		JComboBox quarter_comboBox = new JComboBox(QuarterStrings);
+		JComboBox section_comboBox = new JComboBox(SectionsStrings);
+		
+		JButton btnUpdateRecord = new JButton("Update Record");
+		btnUpdateRecord.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				updateRecord();
+			}
+		});
+		
+		JLabel lblSection = new JLabel("Section");
+		
+				JLabel lblQuater = new JLabel("Quarter");
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(44)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+							.addGap(67)
+							.addComponent(lblQuater, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+							.addGap(98)
+							.addComponent(lblSection))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(28)
+							.addComponent(quarter_comboBox, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(section_comboBox, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
+							.addGap(32)
+							.addComponent(btnUpdateRecord)))
+					.addContainerGap(48, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblQuater)
+						.addComponent(lblSection)
+						.addComponent(lblNewLabel))
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(quarter_comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(section_comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnUpdateRecord))
+					.addGap(18)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		panel.setLayout(gl_panel);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Demo2", null, panel_1, null);
 		frmSchoolPortal.getContentPane().setLayout(groupLayout);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmSchoolPortal.setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("File");
+		menuBar.add(mnNewMenu);
 	}
 }
